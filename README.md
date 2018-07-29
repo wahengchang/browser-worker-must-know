@@ -7,7 +7,12 @@ It is an implementation of how worker works no browser.
  - Data is sent between workers and the main thread via a __*system of messages*__ — both sides send their messages using the `postMessage()` method, and respond to messages via the `onmessage`
 
 
- ## 
+ ## Run 
+ ```
+ $ npm start
+ ```
+
+ open browser `http://localhost:9000/1.counter`
 
 
 
