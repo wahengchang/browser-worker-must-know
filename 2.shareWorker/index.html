@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> browser-worker-must-know</title>
+</head>
+
+<body>
+    <h1>Share Worker Example</h1>
+
+
+    <p>
+        <output id="result"></output>
+    </p>
+    <button onclick="updateWorker()">Start Worker</button>
+
+    <script>
+
+            var worker = new SharedWorker('script.js');
+            worker.port.addEventListener("message", function (e) {
+                document.getElementById('result').textContent = e.data;
+            }, false);
+            worker.port.start();
+            worker.port.postMessage((new Date()).toString());
+
+            const updateWorker = function(){
+                worker.port.postMessage((new Date()).toString());
+            }
+    </script>
+
+</body>

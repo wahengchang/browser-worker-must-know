@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> browser-worker-must-know</title>
+</head>
+
+<body>
+    <h1> Worker Count numbers Example</h1>
+    <p>Count numbers:
+        <output id="result"></output>
+    </p>
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+
+    <script>
+        var w;
+
+        function startWorker() {
+            if (typeof (Worker) !== "undefined") {
+                if (typeof (w) == "undefined") {
+                    w = new Worker("script.js");
+                }
+                w.onmessage = function (event) {
+                    document.getElementById("result").innerHTML = event.data;
+                };
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+            }
+        }
+
+        function stopWorker() {
+            w.terminate();
+            w = undefined;
+        }
+    </script>
+
+</body>
